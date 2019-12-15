@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>重要度／緊急度マトリックスのアプリケーション</title>
+    <style>
+        table.allSell {
+            border-collapse: collapse;
+        }
+        .sell{
+            vertical-align:top;
+            width: 750px;
+            height: 350px;
+        }
+        td {
+            border: solid 1px;
+            padding: 0.5em;
+        }
+    </style>
+
+  </head>
+  <body>
+    <table class = "allSell" id="todo">
+        <tr>
+            <td>   </td>
+            <td>緊急</td>
+            <td>緊急ではない</td>
+        </tr>
+        <tr>
+            <td>重要</td>
+            <td class ="sell">high-high
+                <input type="text" class="text-input" v-model="inputData_1" @keypress.enter="addtodo_1"/>
+                <button @click="addtodo_1">追加</button>
+                <li v-for="(item, index) in todoList_1" >
+                    <span class="comment">{{ item.comment }}</apan>
+                        <button class="delete" @click="completed_1(index)">完了！</button>
+            </td>
+            <td class ="sell"> High-low
+                <input type="text" class="text-input" v-model="inputData_2" @keypress.enter="addtodo_2"/>
+                <button @click="addtodo_2">追加</button>
+                <li v-for="(item, index) in todoList_2" >
+                    <span class="comment">{{ item.comment }}</apan>
+                        <button class="delete" @click="completed_2(index)">完了！</button>
+            </td>
+        </tr>
+        <tr>
+            <td>重要でない</td>
+            <td class ="sell">low-high
+                <input type="text" class="text-input" v-model="inputData_3" @keypress.enter="addtodo_3"/>
+                <button @click="addtodo_3">追加</button>
+                <li v-for="(item, index) in todoList_3" >
+                    <span class="comment">{{ item.comment }}</apan>
+                        <button class="delete" @click="completed_3(index)">完了！</button>
+            </td>
+            <td class ="sell">low-low
+                <input type="text" class="text-input" v-model="inputData_4" @keypress.enter="addtodo_4"/>
+                <button @click="addtodo_4">追加するくらいならhigh-lowへ入れて、どうぞ</button>
+                <li v-for="(item, index) in todoList_4" >
+                    <span class="comment">{{ item.comment }}</apan>
+                        <button class="delete" @click="completed_4(index)">完了！</button>   
+            </td>
+        </tr>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:"#todo",
+            //何らかの拡張があるため配列内はオブジェクトの形にしている
+            data:{
+                inputData_1: "high-high",
+                todoList_1: [
+                    { comment: "初期テストです。消去してください"}
+                ],
+                inputData_2: "High-low",
+                todoList_2: [
+                    { comment: "初期テストです。消去してください"}
+                ],
+                inputData_3: "low-high",
+                todoList_3: [
+                    { comment: "初期テストです。消去してください"}
+                ],
+                inputData_4: "low-low",
+                todoList_4: [
+                    { comment: "初期テストです。消去してください"}
+                ],
+            },
+            //Watchを使い配列が変わったときに配列にデータストレージとして保存する
+            //また、オブジェクト内に変化がある場合はdeep watcherを使おう
+            watch:{
+                todoList_1:function(){
+                    localStorage.setItem("todoList_1",JSON.stringify(this.todoList_1));
+                },
+                todoList_2:function(){
+                    localStorage.setItem("todoList_2",JSON.stringify(this.todoList_2));
+                },
+                todoList_3:function(){
+                    localStorage.setItem("todoList_3",JSON.stringify(this.todoList_3));
+                },
+                todoList_4:function(){
+                    localStorage.setItem("todoList_4",JSON.stringify(this.todoList_4));
+                }
+            },
+            mounted:function(){
+                this.todoList_1 = JSON.parse(localStorage.getItem("todoList_1")) ||　[];
+                this.todoList_2 = JSON.parse(localStorage.getItem("todoList_2")) ||　[];
+                this.todoList_3 = JSON.parse(localStorage.getItem("todoList_3")) ||　[];
+                this.todoList_4 = JSON.parse(localStorage.getItem("todoList_4")) ||　[];
+            },
+            methods:{
+                addtodo_1: function () {
+                    let item = {
+                        comment:this.inputData_1,
+                    }
+                    if(this.inputData_1.length === 0){
+                        alert("文字を入力してください！")
+                        return;
+                    };
+                    if(this.inputData_1.length > 30){
+                        alert("30文字以内で入力してください！")
+                        return this.inputData_1 = "";
+                    };
+                    this.todoList_1.push(item);
+                    this.inputData_1 = "";
+                },
+                completed_1: function (index) {
+                    this.todoList_1.splice(index, 1);
+                },
+                addtodo_2: function () {
+                    let item = {
+                        comment:this.inputData_2,
+                    }
+                    if(this.inputData_2.length === 0){
+                        alert("文字を入力してください！")
+                        return;
+                    };
+                    if(this.inputData_2.length > 30){
+                        alert("30文字以内で入力してください！")
+                        return this.inputData_2 = "";
+                    };
+                    this.todoList_2.push(item);
+                    this.inputData_2 = "";
+                },
+                completed_2: function (index) {
+                    this.todoList_2.splice(index, 1);
+                },
+                addtodo_3: function () {
+                    let item = {
+                        comment:this.inputData_3,
+                    }
+                    if(this.inputData_3.length === 0){
+                        alert("文字を入力してください！")
+                        return;
+                    };
+                    if(this.inputData_3.length > 30){
+                        alert("30文字以内で入力してください！")
+                        return this.inputData_3 = "";
+                    };
+                    this.todoList_3.push(item);
+                    this.inputData_3 = "";
+                },
+                completed_3: function (index) {
+                    this.todoList_3.splice(index, 1);
+                },
+                addtodo_4: function () {
+                    let item = {
+                        comment:this.inputData_4,
+                    }
+                    if(this.inputData_4.length === 0){
+                        alert("文字を入力してください！")
+                        return;
+                    };
+                    if(this.inputData_4.length > 30){
+                        alert("30文字以内で入力してください！")
+                        return this.inputData_4 = "";
+                    };
+                    this.todoList_4.push(item);
+                    this.inputData_4 = "";
+                },
+                completed_4: function (index) {
+                    this.todoList_4.splice(index, 1);
+                },
+            }
+        })
+    </script>
+  </body>
+</html>
+<!-- 
+・HTMLで4つのTodolistを作り、Vue.jsで取得させる
+・同じ動きをする<li>と、メソッドが４つもあるのでまとめることができないだろうか？
+
+・データをローカルストレージ内に格納する
+・４つ各listにテンプレート構文をつくる
+・レスポンシブなデザインにする
+　→bootstrapで整える
+・ローカルストレージからサーバーへつなぎ、ネイティブからWebで使えるようにする。
+・
+-->
