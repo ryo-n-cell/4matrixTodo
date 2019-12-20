@@ -13,18 +13,29 @@
 			table.allSell {
 				border-collapse: collapse;
 			}
+			td {
+				padding: 0.1em;
+			}
+			.upside{
+				border-bottom : solid 1px #E6E6FA;
+			}
 			.sell{
 				vertical-align:top;
-				width: 750px;
-				height: 350px;
+				width: 1000px;
+				height: 400px;
+			}
+			#leftSell_1{
+				border-right : solid 1px #E6E6FA;
+			}
+			#leftSell_2{
+				border-right : solid 1px #E6E6FA;
 			}
 			.taskDisplay{
 				list-style: none;
 				margin-top: 3px;
 			}
-			td {
-				border: solid 1px;
-				padding: 0.1em;
+			#notUrgent-important{
+				background-color: #cdefff;
 			}
 			.rightBar{
 				margin-left: 10px;
@@ -34,287 +45,292 @@
 				float: left;
 				margin-right: 10px;
 			}
-			/* .text-input{
-				float: right;
-			} */
-			/* .addBtn{
-				float: right;
-			} */
-
-    </style>
+			.ma-2.v-btn.v-btn--depressed.v-btn--fab.v-btn--flat.v-btn--outlined.v-btn--round.theme--light.v-size--small.indigo--text{
+				margin : 1px!important ;
+			}
+			.v-text-field.v-text-field--enclosed .v-text-field__details{
+				margin-bottom: 4px;
+			}
+  </style>
 
   </head>
   <body>
     <div id="todo">
-        <v-app id="inspire">
-            <v-navigation-drawer v-model="drawer" app right>
-                <v-list dense>
-                    <v-list-item @click="todoList_1_getOut()">
-                        <v-list-item-action>
-                            <v-icon>looks_one</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                            <v-list-item-title>緊急-重要</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
+			<v-app id="inspire">
+				<v-navigation-drawer v-model="drawer" app right>
+					<!-- <div>
+						<v-btn color="primary" fab small dark>
+							<v-icon>mdi-pencil</v-icon>
+						</v-btn>
+					</div> -->
+					<v-list dense>
+						<v-list-item @click="todoList_1_getOut()">
+							<v-list-item-action>
+								<v-icon>looks_one</v-icon>
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title>緊急-重要</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
 
-                    <li class="rightBar" v-show="getOut1" v-for="(item, index) in todoList_1">
-                        {{ item.comment }}
-                        <v-btn x-small color="error" class="delete" @click="completed_1(index)">完了</v-btn>
-                        <v-divider></v-divider>
-                    </li>
+						<li class="rightBar" v-show="getOut1" v-for="(item, index) in todoList_1">
+							{{ item.comment }}
+							<v-btn x-small color="error" class="delete" @click="completed_1(index)">完了</v-btn>
+							<v-divider></v-divider>
+						</li>
 
-                    <v-list-item @click="todoList_2_getOut()">
-                        <v-list-item-action>
-                            <v-icon>looks_two</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                            <v-list-item-title>緊急でない-重要</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
+						<v-list-item @click="todoList_2_getOut()">
+							<v-list-item-action>
+								<v-icon>looks_two</v-icon>
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title>緊急でない-重要</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
 
-                    <li class="rightBar" v-show="getOut2" v-for="(item, index) in todoList_2">
-                        {{ item.comment }}
-                        <v-btn x-small color="error" class="delete" @click="completed_2(index)">完了</v-btn>
-                        <v-divider></v-divider>
-                    </li>
+						<li class="rightBar" v-show="getOut2" v-for="(item, index) in todoList_2">
+							{{ item.comment }}
+							<v-btn x-small color="error" class="delete" @click="completed_2(index)">完了</v-btn>
+							<v-divider></v-divider>
+						</li>
 
-                    <v-list-item @click="todoList_3_getOut()">
-                        <v-list-item-action>
-                            <v-icon>looks_3</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                            <v-list-item-title>緊急-重要でない</v-list-item-title>
-                        </v-list-item-content>
-										</v-list-item>
+						<v-list-item @click="todoList_3_getOut()">
+							<v-list-item-action>
+								<v-icon>looks_3</v-icon>
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title>緊急-重要でない</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
+											
+						<li class="rightBar" v-show="getOut3" v-for="(item, index) in todoList_3">
+							{{ item.comment }}
+							<v-btn x-small color="error" class="delete" @click="completed_3(index)">完了</v-btn>
+							<v-divider></v-divider>
+						</li>
+
+						<v-list-item @click="todoList_4_getOut()">
+							<v-list-item-action>
+								<v-icon>looks_4</v-icon>
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title>緊急でない-重要でない</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
 										
-										<li class="rightBar" v-show="getOut3" v-for="(item, index) in todoList_3">
-											{{ item.comment }}
-											<v-btn x-small color="error" class="delete" @click="completed_3(index)">完了</v-btn>
-											<v-divider></v-divider>
-									</li>
-
-                    <v-list-item @click="todoList_4_getOut()">
-                        <v-list-item-action>
-                            <v-icon>looks_4</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                            <v-list-item-title>緊急でない-重要でない</v-list-item-title>
-                        </v-list-item-content>
-										</v-list-item>
-									
-										<li class="rightBar" v-show="getOut4" v-for="(item, index) in todoList_4">
-											{{ item.comment }}
-											<v-btn x-small color="error" class="delete" @click="completed_4(index)">完了</v-btn>
-											<v-divider></v-divider>
-									</li>
-                </v-list>
-            </v-navigation-drawer>
-            <!-- 上のバーを表示させる -->
-            <v-app-bar app color="indigo" dark>
-								<!-- 「v-navigation-drawer v-model="drawer"」と「data drawer」と結びつく -->
-								<v-toolbar-title>重要度／緊急度マトリックス</v-toolbar-title>
-								<v-spacer></v-spacer>
-                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            </v-app-bar>
-            <v-content>
-                <v-container fluid fill-height>
-                    <table class ="allSell">
-                        <tr>
-                            <td>   </td>
-                            <td>緊急</td>
-                            <td>緊急ではない</td>
-                        </tr>
-                        <tr>
-                            <td>重要</td>
-                            <td class ="sell">
-                                <v-icon>looks_one</v-icon>
-                                <v-text-field label="緊急-重要" outlined class="text-input" v-model="inputData_1" @keypress.enter="addtodo_1"/></v-text-field>
-                                <v-btn color="primary" class="addBtn" @click="addtodo_1">追加</v-btn>
-                                <li class="taskDisplay" v-for="(item, index) in todoList_1" >
-																		<v-btn small color="error" class="delete" @click="completed_1(index)">完了！</v-btn>
-																		<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
-																<v-divider></v-divider>        
-                            </td>
-                            <td class ="sell">
-                                <v-icon>looks_two</v-icon>
-                                <v-text-field label="緊急でない-重要" outlined class="text-input" v-model="inputData_2" @keypress.enter="addtodo_2"/></v-text-field>
-                                <v-btn color="primary" @click="addtodo_2">追加</v-btn>
-                                <li class="taskDisplay" v-for="(item, index) in todoList_2" >
-																		<v-btn small color="error" class="delete" @click="completed_2(index)">完了！</v-btn>
-																		<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
-																<v-divider></v-divider> 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>重要でない</td>
-                            <td class ="sell">
-                                <v-icon>looks_3</v-icon>
-                                <v-text-field label="緊急-重要でない" outlined class="text-input" v-model="inputData_3" @keypress.enter="addtodo_3"/></v-text-field>
-                                <v-btn color="primary" @click="addtodo_3">追加</v-btn>
-                                <li class="taskDisplay" v-for="(item, index) in todoList_3" >                           
-																		<v-btn small color="error" class="delete" @click="completed_3(index)">完了！</v-btn>
-																		<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
-																<v-divider></v-divider> 
-                            </td>
-                            <td class ="sell">
-                                <v-icon>looks_4</v-icon>
-                                <v-text-field label="緊急-重要でない" outlined class="text-input" v-model="inputData_4" @keypress.enter="addtodo_4"/></v-text-field>
-                                <v-btn color="primary" @click="addtodo_4">入れる必要ないです</v-btn>
-                                <li class="taskDisplay" v-for="(item, index) in todoList_4" >
-																		<v-btn small color="error" class="delete" @click="completed_4(index)">完了！</v-btn>
-																		<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
-																<v-divider></v-divider> 
-                            </td>
-                        </tr>
-                    </table>
-                </v-container>
-            </v-content>
-            <v-footer color="indigo" app>
-                <span class="white--text">&copy; 2019 Ryota_Nakamura</span>
-            </v-footer>
-        </v-app>
+						<li class="rightBar" v-show="getOut4" v-for="(item, index) in todoList_4">
+							{{ item.comment }}
+							<v-btn x-small color="error" class="delete" @click="completed_4(index)">完了</v-btn>
+							<v-divider></v-divider>
+						</li>
+					</v-list>
+				</v-navigation-drawer>
+				<!-- 上のバーを表示させる -->
+				<v-app-bar app color="indigo" dark>
+					<!-- 「v-navigation-drawer v-model="drawer"」と「data drawer」と結びつく -->
+					<v-toolbar-title>重要度／緊急度マトリックス</v-toolbar-title>
+					<v-spacer></v-spacer>
+					<v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+				</v-app-bar>
+				<v-content>
+					<v-container fluid fill-height>
+						<table class ="allSell">
+							<tr class = "upside">
+								<td class ="sell" id="leftSell_1">
+									<v-icon>looks_one</v-icon>
+									<v-text-field label="緊急-重要" outlined class="text-input" v-model="inputData_1" @keypress.enter="addtodo_1"/></v-text-field>
+									<v-btn class="ma-2" outlined small fab color="indigo" @click="addtodo_1">
+										<v-icon>mdi-pencil</v-icon>
+									</v-btn>
+									<li class="taskDisplay" v-for="(item, index) in todoList_1" >
+										<v-btn small color="error" class="delete" @click="completed_1(index)">完了！</v-btn>
+										<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
+									<v-divider></v-divider>        
+								</td>
+								<td id="notUrgent-important" class ="sell">
+									<v-icon>looks_two</v-icon>
+									<v-text-field label="緊急でない-重要" outlined class="text-input" v-model="inputData_2" @keypress.enter="addtodo_2"/></v-text-field>
+									<v-btn class="ma-2" outlined small fab color="indigo" @click="addtodo_2">
+										<v-icon>mdi-pencil</v-icon>
+									</v-btn>
+									<li class="taskDisplay" v-for="(item, index) in todoList_2" >
+										<v-btn small color="error" class="delete" @click="completed_2(index)">完了！</v-btn>
+										<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
+									<v-divider></v-divider> 
+								</td>
+							</tr>
+							<tr>
+								<td class ="sell" id="leftSell_2">
+									<v-icon>looks_3</v-icon>
+									<v-text-field label="緊急-重要でない" outlined class="text-input" v-model="inputData_3" @keypress.enter="addtodo_3"/></v-text-field>
+									<v-btn class="ma-2" outlined small fab color="indigo" @click="addtodo_3">
+										<v-icon>mdi-pencil</v-icon>
+									</v-btn>
+									<li class="taskDisplay" v-for="(item, index) in todoList_3" >                           
+										<v-btn small color="error" class="delete" @click="completed_3(index)">完了！</v-btn>
+										<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
+									<v-divider></v-divider> 
+								</td>
+								<td class ="sell">
+									<v-icon>looks_4</v-icon>
+									<v-text-field label="緊急-重要でない" outlined class="text-input" v-model="inputData_4" @keypress.enter="addtodo_4"/></v-text-field>
+									<v-btn class="ma-2" outlined small fab color="indigo" @click="addtodo_4">
+										<v-icon>mdi-pencil</v-icon>
+									</v-btn>
+									<li class="taskDisplay" v-for="(item, index) in todoList_4" >
+										<v-btn small color="error" class="delete" @click="completed_4(index)">完了！</v-btn>
+										<span class="comment">{{ index }} ･ {{ item.comment }}</apan>
+									<v-divider></v-divider> 
+								</td>
+							</tr>
+						</table>
+					</v-container>
+				</v-content>
+				<v-footer color="indigo" app>
+					<span class="white--text">&copy; 2019 Ryota_Nakamura</span>
+				</v-footer>
+			</v-app>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
-        let vm = new Vue({
-            el:"#todo",
-            vuetify: new Vuetify(),
-            //何らかの拡張があるため配列内はオブジェクトの形にしている
-            data:{
-                drawer: null,
-                inputData_1: "",
-                getOut1:false,
-                todoList_1: [
-                    { comment: "初期テストです。消去してください"}
-                ],
-                inputData_2: "",
-                getOut2:false,
-                todoList_2: [
-                    { comment: "初期テストです。消去してください"}
-                ],
-                inputData_3: "",
-                getOut3:false,
-                todoList_3: [
-                    { comment: "初期テストです。消去してください"}
-                ],
-                inputData_4: "",
-                getOut4:false,
-                todoList_4: [
-                    { comment: "初期テストです。消去してください"}
-                ],
-            },
+			let vm = new Vue({
+				el:"#todo",
+				vuetify: new Vuetify(),
+					//何らかの拡張があるため配列内はオブジェクトの形にしている
+					data:{
+						drawer: null,
+						inputData_1: "",
+						getOut1:false,
+						todoList_1: [
+							{ comment: "初期テストです。消去してください"}
+						],
+						inputData_2: "",
+						getOut2:false,
+						todoList_2: [
+							{ comment: "初期テストです。消去してください"}
+						],
+						inputData_3: "",
+						getOut3:false,
+						todoList_3: [
+							{ comment: "初期テストです。消去してください"}
+						],
+						inputData_4: "",
+						getOut4:false,
+						todoList_4: [
+							{ comment: "初期テストです。消去してください"}
+						],
+					},
             //Watchを使い配列が変わったときに配列にデータストレージとして保存する
             //また、オブジェクト内に変化がある場合はdeep watcherを使おう
-            watch:{
-                todoList_1:function(){
-                    localStorage.setItem("todoList_1",JSON.stringify(this.todoList_1));
-                },
-                todoList_2:function(){
-                    localStorage.setItem("todoList_2",JSON.stringify(this.todoList_2));
-                },
-                todoList_3:function(){
-                    localStorage.setItem("todoList_3",JSON.stringify(this.todoList_3));
-                },
-                todoList_4:function(){
-                    localStorage.setItem("todoList_4",JSON.stringify(this.todoList_4));
-                }
-            },
-            mounted:function(){
-                this.todoList_1 = JSON.parse(localStorage.getItem("todoList_1")) ||　[];
-                this.todoList_2 = JSON.parse(localStorage.getItem("todoList_2")) ||　[];
-                this.todoList_3 = JSON.parse(localStorage.getItem("todoList_3")) ||　[];
-                this.todoList_4 = JSON.parse(localStorage.getItem("todoList_4")) ||　[];
-            },
-            methods:{
-                addtodo_1: function () {
-                    let item = {
-                        comment:this.inputData_1,
-                    }
-                    if(this.inputData_1.length === 0){
-                        alert("文字を入力してください！")
-                        return;
-                    };
-                    if(this.inputData_1.length > 30){
-                        alert("30文字以内で入力してください！")
-                        return this.inputData_1 = "";
-                    };
-                    this.todoList_1.push(item);
-                    this.inputData_1 = "";
-                },
-                completed_1: function (index) {
-                    this.todoList_1.splice(index, 1);
-                },
-                todoList_1_getOut:function () {
-                    this.getOut1 = !this.getOut1;
-                },
-                addtodo_2: function () {
-                    let item = {
-                        comment:this.inputData_2,
-                    }
-                    if(this.inputData_2.length === 0){
-                        alert("文字を入力してください！")
-                        return;
-                    };
-                    if(this.inputData_2.length > 30){
-                        alert("30文字以内で入力してください！")
-                        return this.inputData_2 = "";
-                    };
-                    this.todoList_2.push(item);
-                    this.inputData_2 = "";
-                },
-                completed_2: function (index) {
-                    this.todoList_2.splice(index, 1);
-                },
-                todoList_2_getOut:function () {
-                    this.getOut2 = !this.getOut2;
-                },
-                addtodo_3: function () {
-                    let item = {
-                        comment:this.inputData_3,
-                    }
-                    if(this.inputData_3.length === 0){
-                        alert("文字を入力してください！")
-                        return;
-                    };
-                    if(this.inputData_3.length > 30){
-                        alert("30文字以内で入力してください！")
-                        return this.inputData_3 = "";
-                    };
-                    this.todoList_3.push(item);
-                    this.inputData_3 = "";
-                },
-                completed_3: function (index) {
-                    this.todoList_3.splice(index, 1);
-								},
-								todoList_3_getOut:function () {
-                    this.getOut3 = !this.getOut3;
-                },
-                addtodo_4: function () {
-                    let item = {
-                        comment:this.inputData_4,
-                    }
-                    if(this.inputData_4.length === 0){
-                        alert("文字を入力してください！")
-                        return;
-                    };
-                    if(this.inputData_4.length > 30){
-                        alert("30文字以内で入力してください！")
-                        return this.inputData_4 = "";
-                    };
-                    this.todoList_4.push(item);
-                    this.inputData_4 = "";
-                },
-                completed_4: function (index) {
-                    this.todoList_4.splice(index, 1);
-								},
-								todoList_4_getOut:function () {
-                    this.getOut4 = !this.getOut4;
-                },
-            }
-        })
+					watch:{
+						todoList_1:function(){
+							localStorage.setItem("todoList_1",JSON.stringify(this.todoList_1));
+						},
+						todoList_2:function(){
+							localStorage.setItem("todoList_2",JSON.stringify(this.todoList_2));
+						},
+						todoList_3:function(){
+							localStorage.setItem("todoList_3",JSON.stringify(this.todoList_3));
+						},
+						todoList_4:function(){
+							localStorage.setItem("todoList_4",JSON.stringify(this.todoList_4));
+						}
+					},
+					mounted:function(){
+						this.todoList_1 = JSON.parse(localStorage.getItem("todoList_1")) ||　[];
+						this.todoList_2 = JSON.parse(localStorage.getItem("todoList_2")) ||　[];
+						this.todoList_3 = JSON.parse(localStorage.getItem("todoList_3")) ||　[];
+						this.todoList_4 = JSON.parse(localStorage.getItem("todoList_4")) ||　[];
+					},
+					methods:{
+						addtodo_1: function () {
+							let item = {
+								comment:this.inputData_1,
+							}
+							if(this.inputData_1.length === 0){
+								alert("文字を入力してください！")
+								return;
+							};
+							if(this.inputData_1.length > 30){
+								alert("30文字以内で入力してください！")
+								return this.inputData_1 = "";
+							};
+							this.todoList_1.push(item);
+							this.inputData_1 = "";
+						},
+						completed_1: function (index) {
+							this.todoList_1.splice(index, 1);
+						},
+						todoList_1_getOut:function () {
+							this.getOut1 = !this.getOut1;
+						},
+						addtodo_2: function () {
+							let item = {
+								comment:this.inputData_2,
+							}
+							if(this.inputData_2.length === 0){
+								alert("文字を入力してください！")
+								return;
+							};
+							if(this.inputData_2.length > 30){
+								alert("30文字以内で入力してください！")
+								return this.inputData_2 = "";
+							};
+							this.todoList_2.push(item);
+							this.inputData_2 = "";
+						},
+						completed_2: function (index) {
+							this.todoList_2.splice(index, 1);
+						},
+						todoList_2_getOut:function () {
+							this.getOut2 = !this.getOut2;
+						},
+						addtodo_3: function () {
+							let item = {
+								comment:this.inputData_3,
+							}
+							if(this.inputData_3.length === 0){
+								alert("文字を入力してください！")
+								return;
+							};
+							if(this.inputData_3.length > 30){
+								alert("30文字以内で入力してください！")
+								return this.inputData_3 = "";
+							};
+							this.todoList_3.push(item);
+							this.inputData_3 = "";
+						},
+						completed_3: function (index) {
+							this.todoList_3.splice(index, 1);
+						},
+						todoList_3_getOut:function () {
+							this.getOut3 = !this.getOut3;
+						},
+						addtodo_4: function () {
+							let item = {
+								comment:this.inputData_4,
+							}
+							if(this.inputData_4.length === 0){
+								alert("文字を入力してください！")
+								return;
+							};
+							if(this.inputData_4.length > 30){
+								alert("30文字以内で入力してください！")
+								return this.inputData_4 = "";
+							};
+							this.todoList_4.push(item);
+							this.inputData_4 = "";
+						},
+						completed_4: function (index) {
+							this.todoList_4.splice(index, 1);
+						},
+						todoList_4_getOut:function () {
+							this.getOut4 = !this.getOut4;
+						},
+					}
+			})
     </script>
   </body>
 </html>
